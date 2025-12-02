@@ -1,0 +1,71 @@
+import java.util.Scanner;
+import java.util.Stack;
+
+public class RPNCalculator {
+    
+    public static double calculate(String expression) {
+        Stack<Double> stack = new Stack<>();
+        String[] parts = expression.split(" ");
+        
+        for (String part : parts) {
+            if (isNumber(part)) {
+                stack.push(Double.parseDouble(part));
+            } else if (isOperator(part)) {
+                if (stack.size() < 2) {
+                    throw new RuntimeException("Не хватает чисел для операции: " + part);
+                }
+                double b = stack.pop();
+                double a = stack.pop();
+                double result = doOperation(part, a, b);
+                stack.push(result);
+            } else {
+                throw new RuntimeException("Непонятный символ: " + part);
+            }
+        }
+        
+        if (stack.size() != 1) {
+            throw new RuntimeException("Неправильное выражение");
+        }
+        
+        return stack.pop();
+    }
+    
+    private static boolean isNumber(String str) {
+        try {
+            Double.parseDouble(str);
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
+    }
+    
+    private static boolean isOperator(String str) {
+        return str.equals("+") || str.equals("-") || str.equals("*") || str.equals("/");
+    }
+    
+    private static double doOperation(String op, double a, double b) {
+        if (op.equals("+")) return a + b;
+        if (op.equals("-")) return a - b;
+        if (op.equals("*")) return a * b;
+        if (op.equals("/")) {
+            if (b == 0) throw new RuntimeException("На ноль делить нельзя");
+            return a / b;
+        }
+        throw new RuntimeException("Неизвестная операция: " + op);
+    }
+    
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Введите выражение: ");
+        String input = scanner.nextLine();
+        
+        try {
+            double answer = calculate(input);
+            System.out.println("Ответ: " + answer);
+        } catch (Exception e) {
+            System.out.println("Ошибка: " + e.getMessage());
+        }
+        
+        scanner.close();
+    }
+}
