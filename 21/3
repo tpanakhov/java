@@ -1,0 +1,16 @@
+public class Task_3 {
+    public static <T> T getElement(T[] array, int index) {
+        if (index < 0 || index >= array.length) {
+            throw new IndexOutOfBoundsException("Индекс " + index + " вне границ массива (0-" + (array.length-1) + ")");
+        }
+        return array[index];
+    }
+    
+    public static void main(String[] args) {
+        Integer[] numbers = {1, 2, 3, 4, 5};
+        String[] words = {"apple", "banana", "cherry"};
+        
+        System.out.println(getElement(numbers, 2));  // 3
+        System.out.println(getElement(words, 1));    // banana
+    }
+}
