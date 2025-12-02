@@ -1,0 +1,28 @@
+import java.io.File;
+
+public class Task_4 {
+    public static void main(String[] args) {
+        listAndPrintFilesInDirectory("C:\\Users\\Тof\\IdeaProjects\\fl-fk-cs-sf");
+    }
+
+    public static void listAndPrintFilesInDirectory(String directoryPath) {
+        File directory = new File(directoryPath);
+        
+        if (!directory.exists() || !directory.isDirectory()) {
+            System.out.println("Каталог не существует.");
+            return;
+        }
+        
+        File[] files = directory.listFiles();
+        if (files == null || files.length == 0) {
+            System.out.println("Каталог пуст.");
+            return;
+        }
+        
+        System.out.println("Первые 5 файлов в каталоге:");
+        int count = Math.min(5, files.length);
+        for (int i = 0; i < count; i++) {
+            System.out.println(files[i].getName());
+        }
+    }
+}
