@@ -1,0 +1,189 @@
+import java.util.Arrays;
+
+class ArrayQueueModule {
+    private static Object[] elements = new Object[10];
+    private static int head = 0;
+    private static int size = 0;
+    
+    public static void enqueue(Object element) {
+        if (size == elements.length) {
+            ensureCapacity();
+        }
+        int tail = (head + size) % elements.length;
+        elements[tail] = element;
+        size++;
+    }
+    
+    public static Object element() {
+        if (isEmpty()) {
+            throw new IllegalStateException("Очередь пуста");
+        }
+        return elements[head];
+    }
+    
+    public static Object dequeue() {
+        if (isEmpty()) {
+            throw new IllegalStateException("Очередь пуста");
+        }
+        Object result = elements[head];
+        elements[head] = null;
+        head = (head + 1) % elements.length;
+        size--;
+        return result;
+    }
+    
+    public static int size() {
+        return size;
+    }
+    
+    public static boolean isEmpty() {
+        return size == 0;
+    }
+    
+    public static void clear() {
+        Arrays.fill(elements, null);
+        head = 0;
+        size = 0;
+    }
+    
+    private static void ensureCapacity() {
+        Object[] newElements = new Object[elements.length * 2];
+        for (int i = 0; i < size; i++) {
+            newElements[i] = elements[(head + i) % elements.length];
+        }
+        elements = newElements;
+        head = 0;
+    }
+}
+
+class ArrayQueueADT {
+    private Object[] elements;
+    private int head;
+    private int size;
+    
+    public ArrayQueueADT(int capacity) {
+        elements = new Object[capacity];
+        head = 0;
+        size = 0;
+    }
+    
+    public ArrayQueueADT() {
+        this(10);
+    }
+    
+    public void enqueue(Object element) {
+        if (size == elements.length) {
+            ensureCapacity();
+        }
+        int tail = (head + size) % elements.length;
+        elements[tail] = element;
+        size++;
+    }
+    
+    public Object element() {
+        if (isEmpty()) {
+            throw new IllegalStateException("Очередь пуста");
+        }
+        return elements[head];
+    }
+    
+    public Object dequeue() {
+        if (isEmpty()) {
+            throw new IllegalStateException("Очередь пуста");
+        }
+        Object result = elements[head];
+        elements[head] = null;
+        head = (head + 1) % elements.length;
+        size--;
+        return result;
+    }
+    
+    public int size() {
+        return size;
+    }
+    
+    public boolean isEmpty() {
+        return size == 0;
+    }
+    
+    public void clear() {
+        Arrays.fill(elements, null);
+        head = 0;
+        size = 0;
+    }
+    
+    private void ensureCapacity() {
+        Object[] newElements = new Object[elements.length * 2];
+        for (int i = 0; i < size; i++) {
+            newElements[i] = elements[(head + i) % elements.length];
+        }
+        elements = newElements;
+        head = 0;
+    }
+}
+
+class ArrayQueue {
+    private Object[] elements;
+    private int head;
+    private int size;
+    
+    public ArrayQueue(int capacity) {
+        elements = new Object[capacity];
+        head = 0;
+        size = 0;
+    }
+    
+    public ArrayQueue() {
+        this(10);
+    }
+    
+    public void enqueue(Object element) {
+        if (size == elements.length) {
+            ensureCapacity();
+        }
+        int tail = (head + size) % elements.length;
+        elements[tail] = element;
+        size++;
+    }
+    
+    public Object element() {
+        if (isEmpty()) {
+            throw new IllegalStateException("Очередь пуста");
+        }
+        return elements[head];
+    }
+    
+    public Object dequeue() {
+        if (isEmpty()) {
+            throw new IllegalStateException("Очередь пуста");
+        }
+        Object result = elements[head];
+        elements[head] = null;
+        head = (head + 1) % elements.length;
+        size--;
+        return result;
+    }
+    
+    public int size() {
+        return size;
+    }
+    
+    public boolean isEmpty() {
+        return size == 0;
+    }
+    
+    public void clear() {
+        Arrays.fill(elements, null);
+        head = 0;
+        size = 0;
+    }
+    
+    private void ensureCapacity() {
+        Object[] newElements = new Object[elements.length * 2];
+        for (int i = 0; i < size; i++) {
+            newElements[i] = elements[(head + i) % elements.length];
+        }
+        elements = newElements;
+        head = 0;
+    }
+}
