@@ -1,0 +1,100 @@
+import java.util.NoSuchElementException;
+
+interface Queue {
+    void enqueue(Object element);
+    Object element();
+    Object dequeue();
+    int size();
+    boolean isEmpty();
+    void clear();
+}
+
+abstract class AbstractQueue implements Queue {
+    protected int size;
+    
+    public AbstractQueue() {
+        this.size = 0;
+    }
+    
+    @Override
+    public int size() {
+        return size;
+    }
+    
+    @Override
+    public boolean isEmpty() {
+        return size == 0;
+    }
+    
+    protected void checkNotEmpty() {
+        if (isEmpty()) {
+            throw new NoSuchElementException("Очередь пуста");
+        }
+    }
+}
+
+class Node {
+    Object value;
+    Node next;
+    
+    Node(Object value) {
+        this.value = value;
+        this.next = null;
+    }
+}
+
+class LinkedQueue extends AbstractQueue {
+    private Node head;
+    private Node tail;
+    
+    public LinkedQueue() {
+        super();
+        head = null;
+        tail = null;
+    }
+    
+    @Override
+    public void enqueue(Object element) {
+        Node newNode = new Node(element);
+        if (isEmpty()) {
+            head = newNode;
+            tail = newNode;
+        } else {
+            tail.next = newNode;
+            tail = newNode;
+        }
+        size++;
+    }
+    
+    @Override
+    public Object element() {
+        checkNotEmpty();
+        return head.value;
+    }
+    
+    @Override
+    public Object dequeue() {
+        checkNotEmpty();
+        Object result = head.value;
+        head = head.next;
+        size--;
+        if (isEmpty()) {
+            tail = null;
+        }
+        return result;
+    }
+    
+    @Override
+    public void clear() {
+        Node current = head;
+        while (current != null) {
+            Node next = current.next;
+            current.value = null;
+            current.next = null;
+            current = next;
+        }
+        head = null;
+        tail = null;
+        size = 0;
+    }
+}
