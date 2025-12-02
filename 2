@@ -1,79 +1,41 @@
 import java.util.Arrays;
 
 class AnyTape<T> {
-    private T[] dataArray;
+    private T[] arr;
     
-    public void setArr(T[] array) {
-        this.dataArray = array;
+    public void setArr(T[] arr) {
+        this.arr = arr;
     }
     
     public T getElement(int index) {
-        if (dataArray == null) {
-            throw new IllegalStateException("Массив не инициализирован");
-        }
-        if (index < 0 || index >= dataArray.length) {
-            throw new IndexOutOfBoundsException("Индекс вне диапазона: " + index);
-        }
-        return dataArray[index];
+        return arr[index];
     }
     
     public void printer() {
-        if (dataArray == null) {
-            System.out.println("Массив пуст");
-            return;
-        }
-        System.out.println("Содержимое массива: " + Arrays.toString(dataArray));
-    }
-    
-    public T[] getArray() {
-        return dataArray;
-    }
-    
-    public int getSize() {
-        return dataArray != null ? dataArray.length : 0;
+        System.out.println(Arrays.toString(arr));
     }
 }
 
 public class Task_2 {
-    
-    public static <E> void processArray(String arrayName, E[] array) {
-        AnyTape<E> container = new AnyTape<>();
-        container.setArr(array);
-        System.out.print(arrayName + " - ");
-        container.printer();
-    }
-    
     public static void main(String[] args) {
-        String[] stringArray = {"Hello", "World", "Java"};
-        Integer[] intArray = {10, 20, 30, 40, 50};
-        Double[] doubleArray = {1.1, 2.2, 3.3, 4.4};
+        String[] s = {"Hello", "World", "!"};
+        Integer[] intr = {1, 2, 3, 4, 5, 6, 7, 8};
+        Double[] ad = {1.2, 1.5, 6.7};
         
-        processArray("Строковый массив", stringArray);
-        processArray("Целочисленный массив", intArray);
-        processArray("Массив дробных чисел", doubleArray);
+        AnyTape<String> s1 = new AnyTape<>();
+        AnyTape<Integer> s2 = new AnyTape<>();
+        AnyTape<Double> s3 = new AnyTape<>();
         
-        System.out.println("\n--- Прямая работа с объектами AnyTape ---");
+        s1.setArr(s);
+        s2.setArr(intr);
+        s3.setArr(ad);
         
-        AnyTape<String> stringContainer = new AnyTape<>();
-        AnyTape<Integer> intContainer = new AnyTape<>();
-        AnyTape<Double> doubleContainer = new AnyTape<>();
+        s1.printer();
+        s2.printer();
+        s3.printer();
         
-        stringContainer.setArr(stringArray);
-        intContainer.setArr(intArray);
-        doubleContainer.setArr(doubleArray);
-        
-        stringContainer.printer();
-        intContainer.printer();
-        doubleContainer.printer();
-        
-        System.out.println("\n--- Получение элементов по индексу ---");
-        System.out.println("stringContainer[1] = " + stringContainer.getElement(1));
-        System.out.println("intContainer[0] = " + intContainer.getElement(0));
-        System.out.println("doubleContainer[2] = " + doubleContainer.getElement(2));
-        
-        System.out.println("\n--- Размеры массивов ---");
-        System.out.println("Размер строкового массива: " + stringContainer.getSize());
-        System.out.println("Размер целочисленного массива: " + intContainer.getSize());
-        System.out.println("Размер массива дробных чисел: " + doubleContainer.getSize());
+        System.out.println(s1.getElement(1));
+        System.out.println(s2.getElement(0));
+        System.out.println(s3.getElement(2));
     }
 }
