@@ -1,0 +1,31 @@
+public class Main {
+    public static void main(String[] args) {
+        // Тест ArrayQueueModule
+        ArrayQueueModule.enqueue(1);
+        ArrayQueueModule.enqueue(2);
+        ArrayQueueModule.enqueue(3);
+        System.out.println("ArrayQueueModule: " + ArrayQueueModule.dequeue());
+        System.out.println("ArrayQueueModule size: " + ArrayQueueModule.size());
+        
+        // Тест ArrayQueueADT
+        ArrayQueueADT queueADT = new ArrayQueueADT(5);
+        queueADT.enqueue("A");
+        queueADT.enqueue("B");
+        System.out.println("ArrayQueueADT: " + queueADT.dequeue());
+        
+        // Тест ArrayQueue
+        ArrayQueue queue = new ArrayQueue();
+        queue.enqueue(10);
+        queue.enqueue(20);
+        System.out.println("ArrayQueue: " + queue.dequeue());
+        
+        // Тест LinkedQueue
+        LinkedQueue linkedQueue = new LinkedQueue();
+        linkedQueue.enqueue("First");
+        linkedQueue.enqueue("Second");
+        System.out.println("LinkedQueue: " + linkedQueue.dequeue());
+        System.out.println("LinkedQueue size: " + linkedQueue.size());
+        
+        System.out.println("Все тесты выполнены");
+    }
+}
