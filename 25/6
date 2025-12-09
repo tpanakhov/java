@@ -1,0 +1,40 @@
+import java.util.Scanner;
+import java.util.regex.Pattern;
+
+public class Task6 {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        
+        System.out.print("Введите email адрес: ");
+        String email = scanner.nextLine();
+        
+        // Регулярное выражение для проверки email по RFC 2822 (упрощенное)
+        String pattern = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$";
+        
+        boolean isValid = Pattern.matches(pattern, email);
+        
+        if (isValid) {
+            System.out.println("Email адрес корректен");
+        } else {
+            System.out.println("Email адрес некорректен");
+            
+            // Дополнительная проверка
+            if (!email.contains("@")) {
+                System.out.println("  - Отсутствует символ @");
+            } else {
+                String[] parts = email.split("@");
+                if (parts.length != 2) {
+                    System.out.println("  - Неправильное количество символов @");
+                } else if (parts[0].isEmpty()) {
+                    System.out.println("  - Отсутствует локальная часть (перед @)");
+                } else if (parts[1].isEmpty()) {
+                    System.out.println("  - Отсутствует доменная часть (после @)");
+                } else if (!parts[1].contains(".")) {
+                    System.out.println("  - В доменной части отсутствует точка");
+                }
+            }
+        }
+        
+        scanner.close();
+    }
+}
