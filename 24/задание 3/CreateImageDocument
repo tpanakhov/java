@@ -1,0 +1,16 @@
+package task3;
+
+class CreateImageDocument implements ICreateDocument {
+    
+    @Override
+    public IDocument CreateNew() {
+        System.out.println("Creating new image document...");
+        return new ImageDocument();
+    }
+
+    @Override
+    public IDocument CreateOpen() {
+        System.out.println("Opening existing image document...");
+        return new ImageDocument("OpenedImage.png");
+    }
+}
