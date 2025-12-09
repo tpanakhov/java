@@ -1,0 +1,16 @@
+package task3;
+
+class CreateTextDocument implements ICreateDocument {
+    
+    @Override
+    public IDocument CreateNew() {
+        System.out.println("Creating new text document...");
+        return new TextDocument();
+    }
+
+    @Override
+    public IDocument CreateOpen() {
+        System.out.println("Opening existing text document...");
+        return new TextDocument("OpenedTextDocument.txt");
+    }
+}
