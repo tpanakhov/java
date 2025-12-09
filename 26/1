@@ -1,0 +1,43 @@
+import java.util.Stack;
+
+public class Task1 {
+    public static void main(String[] args) {
+        int[] array = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+
+        System.out.println("Исходный массив:");
+        printArray(array);
+
+        reverseArrayUsingStack(array);
+
+        System.out.println("\nИнвертированный массив:");
+        printArray(array);
+    }
+
+    public static void reverseArrayUsingStack(int[] array) {
+        if (array == null || array.length <= 1) {
+            return; // Массив пуст или слишком мал для инвертирования
+        }
+
+        Stack<Integer> stack = new Stack<>();
+        
+        // Помещаем все элементы массива в стек
+        for (int element : array) {
+            stack.push(element);
+        }
+        
+        // Извлекаем элементы из стека (они будут в обратном порядке)
+        for (int i = 0; i < array.length; i++) {
+            array[i] = stack.pop();
+        }
+    }
+
+    public static void printArray(int[] array) {
+        for (int i = 0; i < array.length; i++) {
+            System.out.print(array[i]);
+            if (i < array.length - 1) {
+                System.out.print(", ");
+            }
+        }
+        System.out.println();
+    }
+}
