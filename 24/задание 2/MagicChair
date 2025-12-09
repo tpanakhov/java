@@ -1,0 +1,8 @@
+java
+package task2;
+
+class MagicChair implements IChair {
+    public void doMagic() {
+        System.out.println("do some magic");
+    }
+}
