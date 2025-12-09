@@ -1,0 +1,67 @@
+package task3;
+
+public class Main {
+    public static void main(String[] args) {
+        System.out.println("=== Testing Text Editor ===");
+        testTextEditor();
+        
+        System.out.println("\n\n=== Testing Image Editor ===");
+        testImageEditor();
+        
+        System.out.println("\n\n=== Testing Document Factory Directly ===");
+        testDocumentFactory();
+    }
+    
+    private static void testTextEditor() {
+        // Создаем фабрику для текстовых документов
+        ICreateDocument textFactory = new CreateTextDocument();
+        
+        // Создаем редактор с текстовой фабрикой
+        EditorApplication textEditor = new EditorApplication(textFactory);
+        
+        // Тестируем функционал
+        textEditor.newDocument();
+        textEditor.showDocumentInfo();
+        textEditor.saveDocument();
+        textEditor.printDocument();
+        textEditor.openDocument();
+        textEditor.showDocumentInfo();
+        textEditor.closeDocument();
+    }
+    
+    private static void testImageEditor() {
+        // Создаем фабрику для изображений
+        ICreateDocument imageFactory = new CreateImageDocument();
+        
+        // Создаем редактор с фабрикой изображений
+        EditorApplication imageEditor = new EditorApplication(imageFactory);
+        
+        // Тестируем функционал
+        imageEditor.newDocument();
+        imageEditor.showDocumentInfo();
+        imageEditor.saveDocument();
+        imageEditor.printDocument();
+        imageEditor.openDocument();
+        imageEditor.showDocumentInfo();
+        imageEditor.closeDocument();
+    }
+    
+    private static void testDocumentFactory() {
+        System.out.println("\n--- Testing DocumentFactory ---");
+        ICreateDocument factory = new CreateTextDocument();
+        
+        IDocument newDoc = factory.CreateNew();
+        IDocument openDoc = factory.CreateOpen();
+        
+        System.out.println("\nNew Document:");
+        newDoc.open();
+        System.out.println(newDoc.getInfo());
+        newDoc.close();
+        
+        System.out.println("\nOpened Document:");
+        openDoc.open();
+        System.out.println(openDoc.getInfo());
+        openDoc.save();
+        openDoc.close();
+    }
+}
