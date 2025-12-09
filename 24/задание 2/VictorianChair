@@ -1,0 +1,14 @@
+java
+package task2;
+
+class VictorianChair implements IChair {
+    private final int age;
+    
+    public VictorianChair(int age) {
+        this.age = age;
+    }
+    
+    public int getAge() {
+        return age;
+    }
+}
