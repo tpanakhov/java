@@ -1,0 +1,6 @@
+java
+package task2;
+
+interface IChair {
+    // Базовый интерфейс для всех стульев
+}
