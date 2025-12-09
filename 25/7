@@ -1,0 +1,42 @@
+import java.util.Scanner;
+import java.util.regex.Pattern;
+
+public class Task7 {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        
+        System.out.print("Введите пароль для проверки: ");
+        String password = scanner.nextLine();
+        
+        // Регулярное выражение для проверки надежности пароля
+        String pattern = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])[a-zA-Z0-9_]{8,}$";
+        
+        boolean isStrong = Pattern.matches(pattern, password);
+        
+        if (isStrong) {
+            System.out.println("Пароль надежный");
+        } else {
+            System.out.println("Пароль ненадежный");
+            
+            // Детальная проверка
+            System.out.println("\nПроблемы:");
+            if (password.length() < 8) {
+                System.out.println("- Менее 8 символов (сейчас: " + password.length() + ")");
+            }
+            if (!password.matches(".*[0-9].*")) {
+                System.out.println("- Нет цифр");
+            }
+            if (!password.matches(".*[a-z].*")) {
+                System.out.println("- Нет строчных букв");
+            }
+            if (!password.matches(".*[A-Z].*")) {
+                System.out.println("- Нет заглавных букв");
+            }
+            if (!password.matches("^[a-zA-Z0-9_]+$")) {
+                System.out.println("- Содержит недопустимые символы (только A-Z, a-z, 0-9, _)");
+            }
+        }
+        
+        scanner.close();
+    }
+}
