@@ -1,0 +1,47 @@
+package task3;
+
+abstract class AbstractDocument implements IDocument {
+    private String title;
+    protected boolean isOpen = false;
+
+    @Override
+    public String getTitle() {
+        return title;
+    }
+
+    @Override
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    @Override
+    public void open() {
+        isOpen = true;
+        System.out.println("Document opened: " + title);
+    }
+
+    @Override
+    public void close() {
+        if (isOpen) {
+            isOpen = false;
+            System.out.println("Document closed: " + title);
+        } else {
+            System.out.println("Document was not opened");
+        }
+    }
+
+    @Override
+    public void save() {
+        System.out.println("Document saved: " + title);
+    }
+
+    @Override
+    public void print() {
+        System.out.println("Printing document: " + title);
+    }
+
+    @Override
+    public String getInfo() {
+        return "Title: " + title + ", Status: " + (isOpen ? "Open" : "Closed");
+    }
+}
