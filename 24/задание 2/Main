@@ -1,0 +1,28 @@
+java
+package task2;
+
+public class Main {
+    public static void main(String[] args) {
+        Client client = new Client();
+        ChairFactory chairFactory = new ChairFactory();
+        
+        FunctionalChair functionalChair = chairFactory.createFunctionalChair();
+        MagicChair magicChair = chairFactory.createMagicChair();
+        VictorianChair victorianChair = chairFactory.createVictorianChair();
+        
+        System.out.println("\nSome information about functional chair:");
+        client.setChair(functionalChair);
+        client.sitChair();
+        System.out.println("Sum result: " + functionalChair.sum(1, 2));
+        
+        System.out.println("\nSome information about victorian chair:");
+        client.setChair(victorianChair);
+        client.sitChair();
+        System.out.println("Victorian chair age: " + victorianChair.getAge());
+        
+        System.out.println("\nSome information about magic chair:");
+        client.setChair(magicChair);
+        client.sitChair();
+        magicChair.doMagic();
+    }
+}
