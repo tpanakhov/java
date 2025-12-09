@@ -1,0 +1,85 @@
+import java.util.Scanner;
+import java.util.regex.Pattern;
+
+public class StringManipulator {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        
+        System.out.println("=== КОНСОЛЬНОЕ ПРИЛОЖЕНИЕ ДЛЯ МАНИПУЛЯЦИИ СТРОКОЙ ===");
+        System.out.println("Разбиение строки на элементы с помощью регулярных выражений");
+        System.out.println();
+        
+        // Ввод строки
+        System.out.print("Введите строку для обработки: ");
+        String input = scanner.nextLine();
+        
+        System.out.println("\n=== ВАРИАНТЫ РАЗБИЕНИЯ СТРОКИ ===");
+        
+        // 1. Разбиение по пробелам
+        System.out.println("\n1. Разбиение по пробелам:");
+        String[] wordsBySpace = input.split("\\s+");
+        printArray(wordsBySpace);
+        
+        // 2. Разбиение по всем не-буквенным символам
+        System.out.println("\n2. Разбиение по всем не-буквенным символам:");
+        String[] wordsByNonLetters = input.split("[^A-Za-zА-Яа-яЁё]+");
+        printArray(wordsByNonLetters);
+        
+        // 3. Разбиение по цифрам
+        System.out.println("\n3. Разбиение по цифрам (цифры как разделители):");
+        String[] partsByDigits = input.split("\\d+");
+        printArray(partsByDigits);
+        
+        // 4. Разбиение по знакам препинания
+        System.out.println("\n4. Разбиение по знакам препинания:");
+        String[] partsByPunctuation = input.split("[.,!?;:]+");
+        printArray(partsByPunctuation);
+        
+        // 5. Пользовательский разделитель
+        System.out.println("\n5. Разбиение по пользовательскому разделителю");
+        System.out.print("Введите регулярное выражение для разделителя: ");
+        String customDelimiter = scanner.nextLine();
+        
+        try {
+            Pattern pattern = Pattern.compile(customDelimiter);
+            String[] customParts = pattern.split(input);
+            System.out.println("Результат:");
+            printArray(customParts);
+        } catch (Exception e) {
+            System.out.println("Ошибка в регулярном выражении: " + e.getMessage());
+        }
+        
+        // Демонстрация работы с Pattern и Matcher
+        System.out.println("\n=== ДОПОЛНИТЕЛЬНЫЕ ОПЕРАЦИИ ===");
+        
+        // Поиск всех цифр
+        Pattern digitPattern = Pattern.compile("\\d+");
+        java.util.regex.Matcher digitMatcher = digitPattern.matcher(input);
+        System.out.print("Найденные числа: ");
+        while (digitMatcher.find()) {
+            System.out.print(digitMatcher.group() + " ");
+        }
+        
+        // Поиск всех слов
+        System.out.print("\nНайденные слова: ");
+        Pattern wordPattern = Pattern.compile("[A-Za-zА-Яа-яЁё]+");
+        java.util.regex.Matcher wordMatcher = wordPattern.matcher(input);
+        while (wordMatcher.find()) {
+            System.out.print(wordMatcher.group() + " ");
+        }
+        
+        scanner.close();
+    }
+    
+    private static void printArray(String[] array) {
+        if (array.length == 0) {
+            System.out.println("  (нет элементов)");
+            return;
+        }
+        
+        for (int i = 0; i < array.length; i++) {
+            System.out.println("  [" + (i + 1) + "]: \"" + array[i] + "\"");
+        }
+        System.out.println("  Всего элементов: " + array.length);
+    }
+}
