@@ -1,0 +1,59 @@
+package task3;
+
+class EditorApplication {
+    private IDocument currentDocument;
+    private ICreateDocument documentFactory;
+    
+    public EditorApplication(ICreateDocument factory) {
+        this.documentFactory = factory;
+        System.out.println("Editor application started with " + 
+                          factory.getClass().getSimpleName());
+    }
+    
+    public void newDocument() {
+        System.out.println("\n=== File -> New ===");
+        currentDocument = documentFactory.CreateNew();
+        currentDocument.open();
+    }
+    
+    public void openDocument() {
+        System.out.println("\n=== File -> Open ===");
+        currentDocument = documentFactory.CreateOpen();
+        currentDocument.open();
+    }
+    
+    public void saveDocument() {
+        System.out.println("\n=== File -> Save ===");
+        if (currentDocument != null) {
+            currentDocument.save();
+        } else {
+            System.out.println("No document to save!");
+        }
+    }
+    
+    public void printDocument() {
+        System.out.println("\n=== File -> Print ===");
+        if (currentDocument != null) {
+            currentDocument.print();
+        } else {
+            System.out.println("No document to print!");
+        }
+    }
+    
+    public void closeDocument() {
+        System.out.println("\n=== File -> Exit (Close) ===");
+        if (currentDocument != null) {
+            currentDocument.close();
+        }
+        System.out.println("Application closed.");
+    }
+    
+    public void showDocumentInfo() {
+        if (currentDocument != null) {
+            System.out.println("\nCurrent document info:");
+            System.out.println(currentDocument.getInfo());
+        } else {
+            System.out.println("No document opened.");
+        }
+    }
+}
