@@ -1,0 +1,14 @@
+java
+package task2;
+
+class Client {
+    private IChair chair;
+    
+    public void setChair(IChair chair) {
+        this.chair = chair;
+    }
+    
+    public void sitChair() {
+        System.out.println("Client on the Chair " + chair.getClass().getSimpleName());
+    }
+}
