@@ -1,0 +1,30 @@
+import java.util.Scanner;
+import java.util.regex.Pattern;
+import java.util.regex.Matcher;
+
+public class Task3 {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        
+        System.out.println("Введите текст с ценами:");
+        String text = scanner.nextLine();
+        
+        // Регулярное выражение для поиска цен
+        Pattern pattern = Pattern.compile("\\b\\d+(\\.\\d+)?\\s+(USD|RUB|EU)\\b");
+        Matcher matcher = pattern.matcher(text);
+        
+        System.out.println("\nНайденные цены:");
+        boolean found = false;
+        
+        while (matcher.find()) {
+            found = true;
+            System.out.println("- " + matcher.group());
+        }
+        
+        if (!found) {
+            System.out.println("Цены не найдены.");
+        }
+        
+        scanner.close();
+    }
+}
