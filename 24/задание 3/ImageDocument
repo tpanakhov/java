@@ -1,0 +1,77 @@
+package task3;
+
+class ImageDocument extends AbstractDocument {
+    private String imagePath;
+    private int height;
+    private int width;
+    private String format;
+
+    public ImageDocument() {
+        setTitle("New Image Document");
+        this.imagePath = "default/path/image.jpg";
+        this.height = 800;
+        this.width = 600;
+        this.format = "JPEG";
+    }
+
+    public ImageDocument(String title) {
+        setTitle(title);
+        this.imagePath = "saved/path/" + title;
+        this.height = 1024;
+        this.width = 768;
+        this.format = "PNG";
+    }
+
+    public String getImagePath() {
+        return imagePath;
+    }
+
+    public void setImagePath(String imagePath) {
+        this.imagePath = imagePath;
+    }
+
+    public int getHeight() {
+        return height;
+    }
+
+    public void setHeight(int height) {
+        this.height = height;
+    }
+
+    public int getWidth() {
+        return width;
+    }
+
+    public void setWidth(int width) {
+        this.width = width;
+    }
+
+    public String getFormat() {
+        return format;
+    }
+
+    public void setFormat(String format) {
+        this.format = format;
+    }
+
+    @Override
+    public void open() {
+        super.open();
+        System.out.println("Image document opened: " + imagePath);
+        System.out.println("Dimensions: " + width + "x" + height + ", Format: " + format);
+    }
+
+    @Override
+    public void print() {
+        System.out.println("Printing a picture: " + getTitle());
+    }
+
+    @Override
+    public String getInfo() {
+        return super.getInfo() + 
+               ", Type: ImageDocument" +
+               ", Path: " + imagePath +
+               ", Size: " + width + "x" + height +
+               ", Format: " + format;
+    }
+}
