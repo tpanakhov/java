@@ -1,0 +1,71 @@
+package task3;
+
+class TextDocument extends AbstractDocument {
+    private String font;
+    private int fontSize;
+    private String fontType;
+    private String content;
+
+    public TextDocument() {
+        setTitle("New Text Document");
+        this.font = "Arial";
+        this.fontSize = 12;
+        this.fontType = "Normal";
+        this.content = "";
+    }
+
+    public TextDocument(String title) {
+        setTitle(title);
+        this.font = "Arial";
+        this.fontSize = 12;
+        this.fontType = "Normal";
+        this.content = "Loaded content from " + title;
+    }
+
+    public String getFont() {
+        return font;
+    }
+
+    public void setFont(String font) {
+        this.font = font;
+    }
+
+    public int getFontSize() {
+        return fontSize;
+    }
+
+    public void setFontSize(int fontSize) {
+        this.fontSize = fontSize;
+    }
+
+    public String getFontType() {
+        return fontType;
+    }
+
+    public void setFontType(String fontType) {
+        this.fontType = fontType;
+    }
+
+    public String getContent() {
+        return content;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
+    }
+
+    @Override
+    public void open() {
+        super.open();
+        System.out.println("Text document opened with font: " + font + ", size: " + fontSize);
+    }
+
+    @Override
+    public String getInfo() {
+        return super.getInfo() + 
+               ", Type: TextDocument" +
+               ", Font: " + font +
+               ", FontSize: " + fontSize +
+               ", FontType: " + fontType;
+    }
+}
