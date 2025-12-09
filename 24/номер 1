@@ -1,0 +1,16 @@
+interface Complex {
+    String toString();
+}
+class ComplexNum implements Complex {
+    int r, i;
+    ComplexNum(int r, int i) { this.r = r; this.i = i; }
+    public String toString() { return r + (i >= 0 ? "+" : "") + i + "i"; }
+}
+interface ComplexFactory {
+    Complex create();
+    Complex create(int r, int i);
+}
+class Factory implements ComplexFactory {
+    public Complex create() { return new ComplexNum(0, 0); }
+    public Complex create(int r, int i) { return new ComplexNum(r, i); }
+}
