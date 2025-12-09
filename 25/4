@@ -1,0 +1,25 @@
+import java.util.Scanner;
+import java.util.regex.Pattern;
+
+public class DigitsWithoutPlusChecker {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        
+        System.out.println("Проверка цифр без знака '+' в выражении");
+        System.out.print("Введите математическое выражение: ");
+        String input = scanner.nextLine();
+        
+        // Регулярное выражение: ищем цифру, за которой НЕТ пробелов и плюса
+        String pattern = "\\d(?!\\s*\\+)";
+        
+        boolean hasDigitsWithoutPlus = Pattern.compile(pattern).matcher(input).find();
+        
+        if (hasDigitsWithoutPlus) {
+            System.out.println("✗ В выражении ЕСТЬ цифры без знака '+'");
+        } else {
+            System.out.println("✓ В выражении НЕТ цифр без знака '+'");
+        }
+        
+        scanner.close();
+    }
+}
